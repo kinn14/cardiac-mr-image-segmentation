@@ -54,5 +54,6 @@ Adam is another method that calculates the individual adaptive learning rate for
 Hyper-parameters β1, β2 ∈ [0, 1] control the exponential decay rates of these first and second moments.
 
 
-
+# Conclusion
+Here, we have reached the conclusion that the U-Net model, along with weighted cross entropy and Adam optimizer gave the best results. Dice Loss was used to evaluate the validation set. Using a learning rate of 0.0002, batch size of 25 images, 50 epochs and weights of [0.1,0.3,0.3,0.3] gave the best overall training and validation score. The biggest challenge posed was the lack of adequate datasets which is a common problem for AI in medical fields as obtaining a lot of data is an expensive and time-consuming process. We have adopted data augmentation techniques to create more training images to enable the model to learn better and overcome this issue and the accuracy of 90.774% has been achieved on unseen test dataset.
 
