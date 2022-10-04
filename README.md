@@ -15,37 +15,37 @@ In our network we apply two 3 x 3 convolutions (padding =1) each succeeded by a 
 
 Initially we research a variety of CNNs, looking at both academic papers and online articles, in order to get a broad understanding of them and how their different architectures may impact the result of the model. From our research and implementations, we found that architectures which have many layers such as DeconvNet and Deeplab both produced bad results primarily due to the fact we have a small dataset, which leads to overfitting while training the model. Despite initial concerns about lack of computational power, we found that SegNet produced good results. However, we decided to use UNet as it produced the best results from our initial experiments, and our research found that it is the best architecture to use when working with low volumes of data <sub>4</sub>.
 
-# Loss functions considered:
+## Loss functions considered:
 The main idea of all loss functions and optimizers is to determine the point where the function is the minimum. However, most algorithms take the assumption that the function is convex. Below we detail the different loss functions we considered using for training. 
-# Lovasz Softmax:
+### Lovasz Softmax:
 Lovasz Softmax is based on the idea of Lovasz hinge and this method assumes that we are dealing with a convex function. As a result, if the function is not convex, we would not be able to find the global minima and may get stuck in a local minimum.
 
-# Dice Loss:
+### Dice Loss:
 Dice loss uses the Dice coefficent to calculate the overlap between two images. It is computed using the following formula:
 
 $Dice (A, B)= \frac{2|A \cap B|}{|A| + |B|} $
 
 *where A and B are images.*
-# Focal Loss:
+### Focal Loss:
 Focal loss builds on standard cross-entropy loss, such that loss can be calculated using:
 $FL(p$<sub>t</sub>$)=(1-p)$<sup>$γ$</sup>$log(p$<sub>t</sub>$)$
 
 Adding the factor $(1-p)$<sup>$γ$</sup> reduces the weighting of well classified examples. This means that misclassfied examples have a greater impact of the overall loss.
 
-# Boundary Loss:
+### Boundary Loss:
 Boundary loss uses distance metric on space contours rather than segmentation regions that other losses such as Dice or Cross-entropy use. Using integrals over the interface of regions enables it to work well on highly unbalanced problems.
 
-# Loss function implemented:
-# Cross-Entropy:
+## Loss function implemented:
+### Cross-Entropy:
 Cross entropy is based on the concept of entropy in information theory and is different from KL Divergence (i.e Kullback Leibler Divergence), which calculates the relative entropy between two probability distributions. Cross-entropy loss deals with finding the total entropy between the distributions. This is represented by taking the negative log-likelihood where the increased negative value indicates a higher loss. We have intuitively understood that in order to really evaluate which classes (3 channels) of the image data are correctly or not correctly predicted, a loss function that deals with categorical data would be the best choice. 
 
-# Optimizers considered: 
+## Optimizers considered: 
 
-# Stochastic Gradient Descent:
+### Stochastic Gradient Descent:
 SGD randomly picks one data point from the whole data set at each iteration to reduce the computations enormously.
 It is also common to sample a small number of data points instead of just one point at each step and that is called “mini-batch” gradient descent. Mini-batch tries to strike a balance between the goodness of gradient descent and speed of SGD.
 
-# AdaGrad:
+### AdaGrad:
 Adagrad is an adaptive learning rate method. In Adagrad we adapt the learning rate to the parameters. We perform larger updates for infrequent parameters and smaller updates for frequent parameters. It is well suited when we have sparse data as in large scale neural networks. In Adagrad, we use different learning rates for every set of parameters for each time step.
 
 ## Optimizer implemented : 
